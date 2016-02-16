@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+
+<style type="text/css">
+<!--
+#txt {
+height: 70%;
+width: 60%;
+}
+-->
+</style>
+
+</head>
+<body>
+<script type="text/javascript">
+function SubmitSenzaSpazi(testo){
+	var curriculum=testo.value;
+	if(curriculum.charAt(0)==""){
+		alert("Descriviti almeno un pò")
+	}else{
+	
+	if(curriculum.charAt(0)==" "){
+		alert("Elimina gli spazi iniziali")
+	
+	
+	}else{
+		document.FormCurriculum.submit();
+	}
+	}
+}
+	</script>
+
+	<DIV ALIGN="right">
+	<font face="Times New Roman" size="3">
+		<dfn><a href="index.html">ritorna alla home</a>
+		</dfn></font>
+	</DIV>
+
+	<DIV ALIGN="center">
+	<form name='FormCurriculum' id='FormCurriculum' onSubmit='return false' action="servletCurriculum" method="get">
+	<font face="Times New Roman" size="5" color="blue">
+	
+		inserisci il tuo curriculum e inviacelo
+		 <br/> 
+	</font>	 
+		<textarea onSubmit='return false' name="curriculum" rows="20" cols="20" id="txt"></textarea><br/> 
+		<!--<input type="file" name="curriculum"><br> -->
+		<input onSubmit='return false' onclick="SubmitSenzaSpazi(curriculum)" type="submit" value="invia" name="Submit!">
+	</form>
+	</DIV>
+
+</body>
+</html>

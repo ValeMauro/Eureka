@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" id="WebApp_ID" version="2.5">
+    <servlet>
+    <servlet-name>Ricerca01</servlet-name>
+    <servlet-class>interfaceUser.ServletRicerca</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Ricerca01</servlet-name>
+    <url-pattern>/servletRicerca</url-pattern>
+  </servlet-mapping>
+    <servlet>
+    <servlet-name>Finale01</servlet-name>
+    <servlet-class>interfaceUser.ServletFinale</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Finale01</servlet-name>
+    <url-pattern>/servletFinale</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>Curriculum01</servlet-name>
+    <servlet-class>interfaceUser.ServletCurriculum</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Curriculum01</servlet-name>
+    <url-pattern>/servletCurriculum</url-pattern>
+  </servlet-mapping>
+ <display-name>progetto</display-name>
+  <welcome-file-list>
+    <welcome-file>index.html</welcome-file>
+    <welcome-file>index.htm</welcome-file>
+    <welcome-file>index.jsp</welcome-file>
+    <welcome-file>default.html</welcome-file>
+    <welcome-file>default.htm</welcome-file>
+    <welcome-file>default.jsp</welcome-file>
+  </welcome-file-list>
+</web-app>
