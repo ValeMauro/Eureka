@@ -73,7 +73,7 @@ public class ServletCurriculum extends HttpServlet {
 					+"}"
 
 					+"if (cEDoppione){"
-					+"	alert('L attributo è gia nella lista');"
+					+"	alert("+a34+"L' attributo è gia nella lista"+a34+");"
 					+"}else{" 
 		
 								
