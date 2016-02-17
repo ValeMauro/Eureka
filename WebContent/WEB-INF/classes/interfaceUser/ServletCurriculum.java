@@ -59,6 +59,23 @@ public class ServletCurriculum extends HttpServlet {
 				+"if(ValoreAttributo.charAt(0)=="+a34+" "+a34+"){"
 					+"alert("+a34+"Elimina gli spazi iniziali"+a34+")"
 				+"}else{"
+	//controllo che il valore non sia gia stato inserito			
+/*	+ "var numeroInt = document.box_Attributi.NumeroDiOggettiInseritiDallUtente.value;"
+	//controllo che gia non ci sia
+	+"var cEDoppione=(1==0);"
+	+"var stringa='';"
+	+"var comando='';"
+
+	+"for (var i = 0; i < numeroInt; i++) {"
+	+"	comando='stringa=document.box_Attributi.AttributoTxt'+i+'.value';"
+	+"	eval(comando);"
+	+"	cEDoppione=cEDoppione || (stringa==ValoreAttributo);"
+	+"}"
+
+	+"if (cEDoppione){"
+	+"	alert('L attributo è gia nella lista');"
+	+"}else{" 
+*/
 				
 				+ "var numero = document.box_Attributi.NumeroDiOggettiInseritiDallUtente.value;"
 				+ "numero++;"
@@ -72,6 +89,7 @@ public class ServletCurriculum extends HttpServlet {
 				+ "document.box_Attributi.NumeroDiOggettiInseritiDallUtente.value=numero;"
 				+ "}"
 				+"}"
+//				+"}"
 				+"}"+
 				//chiusura script java
 				"</script>"+
