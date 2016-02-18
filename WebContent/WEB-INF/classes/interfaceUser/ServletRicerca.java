@@ -129,7 +129,11 @@ public class ServletRicerca extends HttpServlet {
 		
 		for(DocParser dp: result){
 			esempioCV=""+dp.getText();
-		esempioCVLink= esempioCV.substring(0, 20);
+			if(esempioCV.length()>23){
+				esempioCVLink= ""+esempioCV.substring(0, 20)+"...";
+			}else{
+				esempioCVLink=esempioCV;
+			}
 		NumeroDelLink++;
 		resp.getWriter().println(""+
 				"<input type='button' onclick='StringiEstendi(testoCv"+NumeroDelLink+")' value='"+esempioCVLink+"'></br>"+
