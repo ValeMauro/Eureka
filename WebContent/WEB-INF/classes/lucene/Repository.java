@@ -47,17 +47,17 @@ public class Repository {
 
 	public Repository(int value) {
 		analyzer = new StandardAnalyzer();
-		if (value == 0) {
+		if (value == 1) {
 			// directory definitiva
 			try {
 				index = FSDirectory.open(Paths.get("myLucene"));
 			} catch (IOException e) {
 				System.out.println("Errore apertura file myLucene");
 			}
-		} else {
-			// directory random
-			index = new RAMDirectory();
-		}
+		} //else {
+//			// directory random
+//			index = new RAMDirectory();
+//		}
 	}
 
 	// aggiungi un cv a Lucene
