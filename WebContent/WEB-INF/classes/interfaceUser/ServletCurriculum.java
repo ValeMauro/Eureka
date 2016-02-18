@@ -60,23 +60,23 @@ public class ServletCurriculum extends HttpServlet {
 					+"alert("+a34+"Elimina gli spazi iniziali"+a34+")"
 				+"}else{"
 	//controllo che il valore non sia gia stato inserito			
-	+ "var numeroInt = document.box_Attributi.NumeroDiOggettiInseritiDallUtente.value;"
-	//controllo che gia non ci sia
-	+"var cEDoppione=(1==0);"
-	+"var stringa='';"
-	+"var comando='';"
+					+ "var numeroInt = document.box_Attributi.NumeroDiOggettiInseritiDallUtente.value;"
+					//controllo che gia non ci sia
+					+"var cEDoppione=(1==0);"
+					+"var stringa='';"
+					+"var comando='';"
 
-	+"for (var i = 0; i < numeroInt; i++) {"
-	+"	comando='stringa=document.box_Attributi.AttributoTxt'+i+'.value';"
-	+"	eval(comando);"
-	+"	cEDoppione=cEDoppione || (stringa==ValoreAttributo);"
-	+"}"
+					+"for (var i = 0; i < numeroInt; i++) {"
+					+"	comando='stringa=document.box_Attributi.AttributoTxt'+i+'.value';"
+					+"	eval(comando);"
+					+"	cEDoppione=cEDoppione || (stringa==ValoreAttributo);"
+					+"}"
 
-	+"if (cEDoppione){"
-	+"	alert("+a34+"L' attributo è gia nella lista"+a34+");"
-	+"}else{" 
-
-				
+					+"if (cEDoppione){"
+					+"	alert("+a34+"L' attributo è gia nella lista"+a34+");"
+					+"}else{" 
+		
+								
 				+ "var numero = document.box_Attributi.NumeroDiOggettiInseritiDallUtente.value;"
 				+ "var box = document.getElementById('box_Attributi');"
 				+ "var righe="+a34+""+a34+"+box.innerHTML;"
@@ -150,7 +150,7 @@ public class ServletCurriculum extends HttpServlet {
 		 		+"<textarea onSubmit='return false' hidden =true name="+a34+"curriculum"+a34+" rows="+a34+"20"+a34+" cols="+a34+"20"+a34+" >"+Curriculum+"</textarea>"
 		
 		//text nascosta che contiene il numero di tutti gli attributi con nome Attributi+numero da 0 in poi che l'utente vuole per essere ricercato		
-				+ "<input type='text' hidden='1' name='NumeroDiOggettiInseritiDallUtente' hidden="+a34+"1"+a34+" value="+a34+numero+a34+">"
+				+ "<input type='text' hidden='1' name='NumeroDiOggettiInseritiDallUtente' value="+a34+numero+a34+">"
 		
 				+ "</form>"
 				//aggiunta di altri attributi

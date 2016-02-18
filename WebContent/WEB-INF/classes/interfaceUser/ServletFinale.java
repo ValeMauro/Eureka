@@ -23,7 +23,8 @@ public class ServletFinale extends HttpServlet {
 		
 		
 	//curriculum
-		String Curriculum = ""+req.getParameter("curriculum");
+		String CurriculumPPP = ""+req.getParameter("curriculum");
+		String Curriculum=CurriculumPPP.toString();
 		
 		
 	//creo la lista di attributi
