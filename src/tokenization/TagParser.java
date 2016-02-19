@@ -30,7 +30,12 @@ public class TagParser {
 			tagMap = getTagsFromText(text);
 			List<String> tagList = new LinkedList<String>();
 			tagList.addAll(tagMap.get("entity"));
-			tagList.addAll(tagMap.get("dbpedia_cat"));
+			//tagList.addAll(tagMap.get("dbpedia_cat"));
+			if(tagList.size() > 20){
+				List<String> sub= new LinkedList<String>();
+				sub=tagList.subList(0, 19);
+				return sub;
+			}
 			return tagList;
 		}
 		
@@ -46,22 +51,25 @@ public class TagParser {
 			//prendo le liste dei tag dal DocParser dp
 			List<String> listEntity = dp.getEntity();
 			List<String> listDBPed = dp.getDbpedia();
+			List<String> removeEntity = new LinkedList<String>();
+			List<String> removeDBPed = new LinkedList<String>();
 			//rimozione degli elementi di listEntity e listDBPed che non sono in tagList	
 			Iterator<String> it = listEntity.iterator();
-			while(it.hasNext()){
+			/*while(it.hasNext()){
 				String st = it.next();
 				if (!(tagList.contains(st))){
 					listEntity.remove(st);
 				}
 			}
-			/*
+			}*/
 			for (String s : listEntity){
 				if (!(tagList.contains(s))){
-					listEntity.remove(s);
+					removeEntity.add(s);
 				}
 			}
-			*/
+			listEntity.removeAll(removeEntity);
 			
+			/*
 			it = listDBPed.iterator();
 			while(it.hasNext()){
 				String st = it.next();
@@ -69,13 +77,14 @@ public class TagParser {
 					listDBPed.remove(st);
 				}
 			}
-			/*
-			 * for (String s : listDBPed){
+			*/
+			
+			for (String s : listDBPed){
 				if (!(tagList.contains(s))){
-					listDBPed.remove(s);
+					removeDBPed.add(s);
 				}
 			}
-			*/
+			listDBPed.removeAll(removeDBPed);
 			
 			// aggiunti gli elementi di tagList non presenti nelle liste di dp
 			it = tagList.iterator();
