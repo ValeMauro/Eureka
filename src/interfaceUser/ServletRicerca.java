@@ -126,7 +126,14 @@ public class ServletRicerca extends HttpServlet {
 		String esempioCV="";
 		String esempioCVLink="";
 		int NumeroDelLink=0;
-		
+		if(result.isEmpty()){
+			// ricordare all'utente che cosa aveva cercato
+			resp.getWriter().println("<DIV ALIGN="+a34+"center"+a34+">"+a13+
+				"<font face="+a34+"Times New Roman"+a34+" size="+a34+"6"+a34+" color="+a34+"blue"+a34+">"+
+					"<dfn> "+"Nessun Risultato Trovato </dfn>"+
+				"</font>"+a13+
+			"</div>");
+		}
 		for(DocParser dp: result){
 			esempioCV=""+dp.getText();
 			if(esempioCV.length()>23){
