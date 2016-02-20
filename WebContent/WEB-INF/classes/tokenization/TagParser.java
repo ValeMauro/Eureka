@@ -31,9 +31,9 @@ public class TagParser {
 			List<String> tagList = new LinkedList<String>();
 			tagList.addAll(tagMap.get("entity"));
 			//tagList.addAll(tagMap.get("dbpedia_cat"));
-			if(tagList.size() > 20){
+			if(tagList.size() > 100){
 				List<String> sub= new LinkedList<String>();
-				sub=tagList.subList(0, 19);
+				sub=tagList.subList(0, 99);
 				return sub;
 			}
 			return tagList;
@@ -110,53 +110,7 @@ public class TagParser {
 			//aggiungo il cv nel repository
 			rep.addDocParser(dp);
 		}
-	/*
-	//metodo per trovare i tag di un CV in input
-	public List<String> parseTags(String text) throws UnirestException{
-		dp.setText(text);
-		//genero le liste di tag da TAGME
-		Map<String, LinkedList<String>> tagMap = new HashMap<String, LinkedList<String>>();
-		tagMap = getTagsFromText(text);
-		//imposto il DocParser
-		dp.setEntity(tagMap.get("entity"));
-		dp.setDbpedia(tagMap.get("dbpedia_cat"));
-		List<String> tagList = new LinkedList<String>();
-		tagList.addAll(dp.getEntity());
-		tagList.addAll(dp.getDbpedia());
-		return tagList;
-	}
-	
-	//save della lista di tag
-	public void saveCV(List<String> tagList){
-		//prendo le liste dei tag dal DocParser dp
-		List<String> listEntity = dp.getEntity();
-		List<String> listDBPed = dp.getDbpedia();
-		//rimozione degli elementi di listEntity e listDBPed che non sono in tagList
-		for (String s : listEntity){
-			if (!(tagList.contains(s))){
-				listEntity.remove(s);
-			}
-		}
-		for (String s : listDBPed){
-			if (!(tagList.contains(s))){
-				listDBPed.remove(s);
-			}
-		}
-		// aggiunti gli elementi di tagList non presenti nelle liste di dp
-		for (String s : tagList){
-			if(!(listEntity.contains(s) || (listDBPed.contains(s)))){
-				listEntity.add(s);
-			}
-		}
-		rep.addDocParser(dp);		
-	}
-	
-	//metodo per salvare un nuovo documento nel repository
-	public void saveCV(DocParser dp){
-		//aggiungo il cv nel repository
-		rep.addDocParser(dp);
-	}
- */
+
 	//metodo per parsare la query
 	public List<DocParser> parseQuery(String text) throws UnirestException{
 		//genero le liste di tag della query da TAGME
