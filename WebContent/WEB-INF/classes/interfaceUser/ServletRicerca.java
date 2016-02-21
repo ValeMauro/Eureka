@@ -38,7 +38,7 @@ public class ServletRicerca extends HttpServlet {
 		resp.getWriter().println(""+
 				"<html>"+
 				"<head>"+
-				"<title>TestForm</title>"+
+				"<title>SistemaDiRicercaCV</title>"+
 				"<style type="+a34+"text/css"+a34+">"+
 				"<!--"+
 				"#txt {"+

@@ -38,7 +38,7 @@ public class ServletRicerca extends HttpServlet {
 		resp.getWriter().println(""+
 				"<html>"+
 				"<head>"+
-				"<title>TestForm</title>"+
+				"<title>SistemaDiRicercaCV</title>"+
 				"<style type="+a34+"text/css"+a34+">"+
 				"<!--"+
 				"#txt {"+
@@ -126,14 +126,7 @@ public class ServletRicerca extends HttpServlet {
 		String esempioCV="";
 		String esempioCVLink="";
 		int NumeroDelLink=0;
-		if(result.isEmpty()){
-			// ricordare all'utente che cosa aveva cercato
-			resp.getWriter().println("<DIV ALIGN="+a34+"center"+a34+">"+a13+
-				"<font face="+a34+"Times New Roman"+a34+" size="+a34+"6"+a34+" color="+a34+"blue"+a34+">"+
-					"<dfn> "+"Nessun Risultato Trovato </dfn>"+
-				"</font>"+a13+
-			"</div>");
-		}
+		
 		for(DocParser dp: result){
 			esempioCV=""+dp.getText();
 			if(esempioCV.length()>23){
@@ -141,7 +134,7 @@ public class ServletRicerca extends HttpServlet {
 			}else{
 				esempioCVLink=esempioCV;
 			}
-			NumeroDelLink++;
+		NumeroDelLink++;
 		resp.getWriter().println(""+
 				"<input type='button' onclick='StringiEstendi(testoCv"+NumeroDelLink+")' value='"+esempioCVLink+"'></br>"+
 				"<DIV ALIGN="+a34+"center"+a34+">"+

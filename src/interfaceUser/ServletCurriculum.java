@@ -68,7 +68,7 @@ public class ServletCurriculum extends HttpServlet {
 		//apertura html
 		resp.getWriter().println("<html>"+
 				"<head>"+
-				"<title>TestForm</title>"+
+				"<title>SistemaDiRicercaCV</title>"+
 				"</head>"+
 				"<body>"+
 
@@ -153,7 +153,7 @@ public class ServletCurriculum extends HttpServlet {
 		
 		 
 		//pulsante di fine
-		+ "<input type="+a34+"submit"+a34+" value="+a34+"fine"+a34+" name="+a34+"Submit!"+a34+">"
+		+ "<br/><input type="+a34+"submit"+a34+" value="+a34+"Fine"+a34+" name="+a34+"Submit!"+a34+"><br/><br/>"
 		+ "</DIV>");
 
 
@@ -246,7 +246,7 @@ public class ServletCurriculum extends HttpServlet {
 		//apertura html
 			resp.getWriter().println("<html>"+
 					"<head>"+
-					"<title>TestForm</title>"+
+					"<title>SistemaDiRicercaCV</title>"+
 					"</head>"+
 					"<body>"+
 
