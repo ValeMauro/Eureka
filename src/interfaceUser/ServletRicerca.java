@@ -134,6 +134,12 @@ public class ServletRicerca extends HttpServlet {
 			}else{
 				esempioCVLink=esempioCV;
 			}
+			
+		/*	
+			if(esempioCVLink.contains(""+a13)){
+				esempioCVLink=""+esempioCVLink.substring(0, esempioCVLink.indexOf(a13))+"...";
+			}
+		*/	
 		NumeroDelLink++;
 		resp.getWriter().println(""+
 				"<input type='button' onclick='StringiEstendi(testoCv"+NumeroDelLink+")' value='"+esempioCVLink+"'></br>"+
