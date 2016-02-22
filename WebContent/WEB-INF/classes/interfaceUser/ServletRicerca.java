@@ -15,6 +15,7 @@ import tokenization.DocParser;
 import tokenization.TagParser;
 
 public class ServletRicerca extends HttpServlet {
+	private static final long serialVersionUID = 1L;
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -27,12 +28,9 @@ public class ServletRicerca extends HttpServlet {
 		try {
 			result = tagParser.parseQuery(query);
 		} catch (UnirestException e) {
-			// TODO Auto-generated catch block
-		//	e.printStackTrace();
+			e.printStackTrace();
 		}
 		
-		
-		// qui pensavo di mettere jsp
 
 		//apertura html
 		resp.getWriter().println(""+
@@ -105,22 +103,8 @@ public class ServletRicerca extends HttpServlet {
 		
 		
 		
-		// mi risponde lorella cosa metto? Link?
-//			TagParser parser= new TagParser();
-//			List<DocParser> result = new LinkedList<DocParser>();
-		//	result = parser.parseQuery(query);
+		// visualizza i risultati della ricerca
 			
-			
-			
-		/* for each di tutti i documenti in result e 
-		 * estrapolare una lista di tutti i con primi 40 caratteri per isarli come link
-		 * che se uno ci clicca apre il curriculum
-		 * 
-		 * vedere iteratore in valeria
-		 * 
-		 * 
-	*/
-				
 		resp.getWriter().println("<form id='MostraRisultati'>");
 		
 		String esempioCV="";
@@ -153,26 +137,7 @@ public class ServletRicerca extends HttpServlet {
 		
 		
 		
-		resp.getWriter().println("</form>");		
-		
-		/*
-		//forse cercavi
-		resp.getWriter().println(""+
-				"<font face="+a34+"Times New Roman"+a34+" size="+a34+"2"+a34+" color="+a34+"red"+a34+">"+
-					"<dfn> <br/>Forse Cercavi <br/> <dfn> "+
-				"</font>");
-
-		
-		///		mi viene passata la lista dei suggerimenti e li metto come bottoni
-		///		 	esempio bottone
-		String value="pippo";
-		resp.getWriter().println(""+
-				"<form action="+a34+"servletRicerca"+a34+" method="+a34+"get"+a34+">"+a13+
-					"<input type="+a34+"submit"+a34+" value="+a34+value+a34+" name="+a34+"query"+a34+">"+a13+
-				"</form>");
-
-		*/
-		
+		resp.getWriter().println("</form>");
 		
 		
 		//Chiusura Pagina

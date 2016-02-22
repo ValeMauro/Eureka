@@ -8,6 +8,7 @@ import tokenization.DocParser;
 public class DataSet {
 	private List<DocParser> cv = new LinkedList<DocParser>();
 
+	// creazione del data set iniziale
 	public DataSet() {
 		List<String> entity_list1 = new LinkedList<String>();
 		List<String> dbpedia_list1 = new LinkedList<String>();

@@ -11,40 +11,11 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.mashape.unirest.http.exceptions.UnirestException;
 
-import tokenization.DocParser;
 import tokenization.TagParser;
 
 public class ServletCurriculum extends HttpServlet {
-	private List<String> l= new LinkedList<String>();
-	private String cv="";
-	
-//	private class Curriculum{
-//		private List<String> listaAttributi= new LinkedList<String>();
-//		private String cv="";
-//		
-//		public Curriculum(){}
-//		
-//		public List<String> getListaAttributi(){
-//			return listaAttributi;
-//		}
-//		
-//		public String getCv(){
-//			return cv;
-//		}
-//		
-//		public void setListaAttributi(List<String> list){
-//			listaAttributi= list;
-//		}
-//		
-//		public void setCv(String s){
-//			cv=s;
-//		}
-//		
-//		
-//		
-//	}
-//	
-	
+	private static final long serialVersionUID = 1L;
+	private String cv="";	
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -52,15 +23,12 @@ public class ServletCurriculum extends HttpServlet {
 		
 		char a34 = 34;//serve per i doppi apici 34 in ascii ""
 		int numero=0;
-		//	DocParser CV =new DocParser();
-		//	TagParser pippo=new TagParser();
 		
 		TagParser tagParser = new TagParser();
 		List<String> listaAttributi = new LinkedList<String>();
 	try {
 			listaAttributi.addAll(tagParser.parseTags(this.cv));
 		} catch (UnirestException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	
@@ -158,9 +126,9 @@ public class ServletCurriculum extends HttpServlet {
 
 
 
-		// invio la richiesta a lorella e lei mi risponde
+		// invio la richiesta alla classe TagParser e lei mi risponde
 
-		// creo check list con i valori che lorella mi da
+		// creo check list con i valori che la classe TagParser mi da
 		//in questo modo
 
 		String ValoreAttributo="";
@@ -205,8 +173,6 @@ public class ServletCurriculum extends HttpServlet {
 		
 		
 	//curriculum
-	//	String CurriculumPPP = ""+req.getParameter("curriculum");
-	//	String Curriculum=CurriculumPPP.toString();
 		
 		
 	//creo la lista di attributi
@@ -226,19 +192,9 @@ public class ServletCurriculum extends HttpServlet {
 	 	
 	//salvataggio curriculum	
 		TagParser tagParser = new TagParser();
-		/* 
-		try {
-			tagParser.parseTags(Curriculum);
-		} catch (UnirestException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		*/
-		 
 		 try {
 			tagParser.saveCV(this.cv,ListaAttributi);
 		} catch (UnirestException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		

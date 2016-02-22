@@ -19,18 +19,19 @@ public class TagParser {
 
 	//Costruttore
 	public TagParser(){
-		rep = new Repository(1);
+		rep = new Repository();
 		dp = new DocParser();
 	}
 	
-	//metodo per trovare i tag di un CV in input
+	//metodo per trovare i tag di un CV in input, restituisce una lista di tag
 		public List<String> parseTags(String text) throws UnirestException{
 			//genero le liste di tag da TAGME
 			Map<String, LinkedList<String>> tagMap = new HashMap<String, LinkedList<String>>();
 			tagMap = getTagsFromText(text);
 			List<String> tagList = new LinkedList<String>();
 			tagList.addAll(tagMap.get("entity"));
-			//tagList.addAll(tagMap.get("dbpedia_cat"));
+			
+			// vengono restituiti al massimo 100 tag
 			if(tagList.size() > 100){
 				List<String> sub= new LinkedList<String>();
 				sub=tagList.subList(0, 99);
@@ -39,7 +40,7 @@ public class TagParser {
 			return tagList;
 		}
 		
-		//save della lista di tag
+		// salvataggio del testo del cv, con relativi tags
 		public void saveCV(String text, List<String> tagList) throws UnirestException{
 			dp.setText(text);
 			//genero le liste di tag da TAGME
@@ -53,31 +54,16 @@ public class TagParser {
 			List<String> listDBPed = dp.getDbpedia();
 			List<String> removeEntity = new LinkedList<String>();
 			List<String> removeDBPed = new LinkedList<String>();
+			
 			//rimozione degli elementi di listEntity e listDBPed che non sono in tagList	
 			Iterator<String> it = listEntity.iterator();
-			/*while(it.hasNext()){
-				String st = it.next();
-				if (!(tagList.contains(st))){
-					listEntity.remove(st);
-				}
-			}
-			}*/
+
 			for (String s : listEntity){
 				if (!(tagList.contains(s))){
 					removeEntity.add(s);
 				}
 			}
 			listEntity.removeAll(removeEntity);
-			
-			/*
-			it = listDBPed.iterator();
-			while(it.hasNext()){
-				String st = it.next();
-				if (!(tagList.contains(st))){
-					listDBPed.remove(st);
-				}
-			}
-			*/
 			
 			for (String s : listDBPed){
 				if (!(tagList.contains(s))){
@@ -94,22 +80,11 @@ public class TagParser {
 					listEntity.add(st);
 				}
 			}
-			/*
-			for (String s : tagList){
-				if(!(listEntity.contains(s) || (listDBPed.contains(s)))){
-					listEntity.add(s);
-				}
-			}
-			*/
 			
+			// salva il documento in lucene
 			rep.addDocParser(dp);		
 		}
 		
-		//metodo per salvare un nuovo documento nel repository
-		public void saveCV(DocParser dp){
-			//aggiungo il cv nel repository
-			rep.addDocParser(dp);
-		}
 
 	//metodo per parsare la query
 	public List<DocParser> parseQuery(String text) throws UnirestException{
@@ -119,7 +94,8 @@ public class TagParser {
 		//imposto il DocParser
 		dp.setEntity(qtagMap.get("entity"));
 		dp.setDbpedia(qtagMap.get("dbpedia_cat"));
-		//faccio la search dei documenti nel repository
+		
+		//faccio la ricerca dei documenti nel repository
 		List<DocParser> listDP = new LinkedList<DocParser>();
 		try {
 			listDP = rep.search(dp);
@@ -142,19 +118,13 @@ public class TagParser {
 				  .field("include_categories","true")
 				  .field("long_text", "0")
 				  .asJson();
-		//print di check dell'oggetto json
-		//System.out.println(jsonResponse.getBody().toString() + "\n");
 		
 		JSONArray jsonArr = jsonResponse.getBody().getObject().getJSONArray("annotations");
 		for(int i=0;i<jsonArr.length();i++)
 		{
 			JSONObject jOb = jsonArr.getJSONObject(i);
 			if(jOb.has("title")){
-				//print di check
-				//System.out.println(jOb.toString() + "\n");
 				JSONArray jObArr = jOb.getJSONArray("dbpedia_categories");
-				//print di check
-				//System.out.println(jObArr.toString() + "\n");
 				String entity = jOb.getString("title");
 				String[] dbcat = new String[jObArr.length()];
 				for(int j=0; j<jObArr.length(); j++){
