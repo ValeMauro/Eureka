@@ -40,6 +40,10 @@ public class Repository {
 	private final String URL = "url";
 	private final String DATE = "date";
 	private final String RANK = "rank";
+	private final int titleRank=20;
+	private final int subtitleRank=10;
+	private final double textRank=0.5;
+	
 	
 	public Repository() {}
 	
@@ -127,8 +131,8 @@ public class Repository {
 			res.setText(doc.get(TEXT));
 			res.setUrl(doc.get(URL));
 			res.setDate(doc.get(DATE));
-			double rank= setRank(res,querystr);
-			//res.setRank();
+			double rank= makeValue(res,querystr);
+			res.setRank(rank);
 			results.add(res);
 		}	
 	}
@@ -140,8 +144,22 @@ public class Repository {
 		return false;
 	}
 
-	private double setRank(Result res, String querystr) {
-		// TODO Auto-generated method stub
-		return 0;
+
+	private double makeValue(Result res, String s) {
+		double rank= 0;
+		if(res.getTitle().contains(s)) rank=rank+titleRank;
+		if(res.getSubtitle().contains(s)) rank=rank+subtitleRank;
+		int count= counter(res.getText(),s);
+		rank= rank+(count*textRank);
+		return rank;		
+	}
+
+	private int counter(String text, String querystr) {
+		int counter=0;
+		int length= querystr.length();
+		for(int i=0; i<text.length()-length; i++){
+			if((text.substring(i, i+length)).equals(querystr)) counter++;
+		}
+		return counter;
 	}
 }
