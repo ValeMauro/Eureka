@@ -145,20 +145,25 @@ public class Repository {
 	}
 
 
-	private double makeValue(Result res, String s) {
+	private double makeValue(Result res, String querystr) {
 		double rank= 0;
-		if(res.getTitle().contains(s)) rank=rank+titleRank;
-		if(res.getSubtitle().contains(s)) rank=rank+subtitleRank;
-		int count= counter(res.getText(),s);
-		rank= rank+(count*textRank);
+		//scompongo querystr in un array di parole
+		String [] tokens = querystr.split("[\\W]");
+		//verifico il match di ogni parola in titolo, subtitolo e testo
+        for(String s:tokens){
+        	if(res.getTitle().contains(s)) rank=rank+titleRank;
+    		if(res.getSubtitle().contains(s)) rank=rank+subtitleRank;
+    		int count= counter(res.getText(),s);
+    		rank= rank+(count*textRank);	
+        }
 		return rank;		
 	}
 
-	private int counter(String text, String querystr) {
+	private int counter(String text, String word) {
 		int counter=0;
-		int length= querystr.length();
+		int length= word.length();
 		for(int i=0; i<text.length()-length; i++){
-			if((text.substring(i, i+length)).equals(querystr)) counter++;
+			if((text.substring(i, i+length)).equalsIgnoreCase(word)) counter++;
 		}
 		return counter;
 	}
