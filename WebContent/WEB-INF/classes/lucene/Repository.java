@@ -94,7 +94,7 @@ public class Repository {
 	public LinkedList<Result> searchLucene(String querystr) throws IOException, ParseException {
 		
 		try {
-			Query query = new QueryParser(TITLE, analyzer).parse(querystr);
+			Query query = new QueryParser(SOURCE, analyzer).parse(querystr);
 			
 			// apro l'indice di lettura del file
 			IndexReader reader = DirectoryReader.open(index);
@@ -108,7 +108,7 @@ public class Repository {
 				int docId = hits[i].doc;
 				
 				Document doc = searcher.doc(docId);
-				addInResultList(doc,docId);
+				addInResultList(doc,docId,querystr);
 			}
 		} catch (IOException e) {
 			System.out.println(e.getMessage());
@@ -117,16 +117,31 @@ public class Repository {
 
 	}
 
-	private void addInResultList(Document doc, int docId) {
-		Result res= new Result();
-		res.setId(docId);
-		res.setSource(doc.get(SOURCE));
-		res.setTitle(doc.get(TITLE));
-		res.setSubtitle(doc.get(SUBTITLE));
-		res.setText(doc.get(TEXT));
-		res.setUrl(doc.get(URL));
-		res.setDate(doc.get(DATE));
-		//res.setRank();
-		results.add(res);
+	private void addInResultList(Document doc, int docId, String querystr) {
+		if(!isOnResult(docId)){
+			Result res= new Result();
+			res.setId(docId);
+			res.setSource(doc.get(SOURCE));
+			res.setTitle(doc.get(TITLE));
+			res.setSubtitle(doc.get(SUBTITLE));
+			res.setText(doc.get(TEXT));
+			res.setUrl(doc.get(URL));
+			res.setDate(doc.get(DATE));
+			double rank= setRank(res,querystr);
+			//res.setRank();
+			results.add(res);
+		}	
+	}
+
+	private boolean isOnResult(int docId) {
+		for (Result res : results) {
+			if(res.getId()==docId) return true;
+		}
+		return false;
+	}
+
+	private double setRank(Result res, String querystr) {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 }
