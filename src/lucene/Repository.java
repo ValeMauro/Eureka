@@ -50,6 +50,7 @@ public class Repository {
 	//creazione directory di Lucene
 	public void create(){
 		analyzer = new StandardAnalyzer();
+		results= new LinkedList<Result>();
 		try {
 			File f = new File("myLucene");
 			if (!f.exists()) {
@@ -94,11 +95,39 @@ public class Repository {
 		}
 	}
 	
-	//mcercare nel file di Lucene
+	//conta url associati ad una source
+	
+	public LinkedList<Result> searchSource(String name) throws ParseException{
+
+		try {
+			Query query = new QueryParser(SOURCE, analyzer).parse(name);
+			
+			// apro l'indice di lettura del file
+			IndexReader reader = DirectoryReader.open(index);
+			searcher = new IndexSearcher(reader);
+
+			TopDocs docs = searcher.search(query, hitsPerPage);
+			ScoreDoc[] hits = docs.scoreDocs;
+
+			// Ricavo da ogni documento che matcha con la query
+			for (int i = 0; i < hits.length; i++) {
+				int docId = hits[i].doc;
+				
+				Document doc = searcher.doc(docId);
+				addInResultList(doc,docId,name);
+			}
+		} catch (IOException e) {
+			System.out.println(e.getMessage());
+		}
+		return results;
+
+	}
+	
+	//cercare nel file di Lucene
 	public LinkedList<Result> searchLucene(String querystr) throws IOException, ParseException {
 		
 		try {
-			Query query = new QueryParser(SOURCE, analyzer).parse(querystr);
+			Query query = new QueryParser(TEXT, analyzer).parse(querystr);
 			
 			// apro l'indice di lettura del file
 			IndexReader reader = DirectoryReader.open(index);
@@ -121,6 +150,7 @@ public class Repository {
 
 	}
 
+	
 	private void addInResultList(Document doc, int docId, String querystr) {
 		if(!isOnResult(docId)){
 			Result res= new Result();
