@@ -6,6 +6,8 @@ import java.util.LinkedList;
 public class Result {
 	private int id;
 	private String source;
+	private String fileName;
+	private String html;
 	private String title;
 	private String subtitle;
 	private String text;
@@ -13,7 +15,9 @@ public class Result {
 	private String date;  //format "gg/mm/aaaa"
 	private double rank;
 	
-	public Result(){}
+	public Result(){
+		rank=0;
+	}
 	
 	public int getId() {
 		return id;
@@ -46,10 +50,12 @@ public class Result {
 	public String getText() {
 		return text;
 	}
-	public void setText(String text) {
-		this.text = text;
+	public void setText(String text) {		
+		this.text =text;
 	}
 	
+	
+
 	public String getUrl() {
 		return url;
 	}
@@ -114,6 +120,8 @@ public class Result {
 	private static Result moreLastDate(Result d1, Result d2){
 		String date1=d1.getDate();
 		String date2=d2.getDate();
+		if(date1==null) return d2;
+		if(date2==null) return d1;
 		int g1= Integer.parseInt(date1.substring(0, 2));
 		int m1= Integer.parseInt(date1.substring(3, 5));
 		int a1= Integer.parseInt(date1.substring(6, 10));
@@ -135,6 +143,22 @@ public class Result {
 			if(a1>a2) return d1;
 			else return d2;
 		}
+	}
+
+	public String getFileName() {
+		return fileName;
+	}
+
+	public void setFileName(String fileName) {
+		this.fileName = fileName;
+	}
+
+	public String getHtml() {
+		return html;
+	}
+
+	public void setHtml(String html) {
+		this.html = html;
 	}
 	
 
