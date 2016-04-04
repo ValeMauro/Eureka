@@ -7,6 +7,7 @@ public class Result {
 	private int id;
 	private String source;
 	private String fileName;
+	private String html;
 	private String title;
 	private String subtitle;
 	private String text;
@@ -14,7 +15,9 @@ public class Result {
 	private String date;  //format "gg/mm/aaaa"
 	private double rank;
 	
-	public Result(){}
+	public Result(){
+		rank=0;
+	}
 	
 	public int getId() {
 		return id;
@@ -47,10 +50,19 @@ public class Result {
 	public String getText() {
 		return text;
 	}
-	public void setText(String text) {
-		this.text = text;
+	public void setText(String text) {		
+		this.text = parseText(text);
 	}
 	
+	private String parseText(String text) {
+		String newText="";
+		char [] temp= text.toCharArray();
+		for(int i=0; i<temp.length; i++){
+			
+		}
+		return newText;
+	}
+
 	public String getUrl() {
 		return url;
 	}
@@ -144,6 +156,14 @@ public class Result {
 
 	public void setFileName(String fileName) {
 		this.fileName = fileName;
+	}
+
+	public String getHtml() {
+		return html;
+	}
+
+	public void setHtml(String html) {
+		this.html = html;
 	}
 	
 
