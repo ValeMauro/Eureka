@@ -6,6 +6,7 @@ import java.util.LinkedList;
 public class Result {
 	private int id;
 	private String source;
+	private String fileName;
 	private String title;
 	private String subtitle;
 	private String text;
@@ -135,6 +136,14 @@ public class Result {
 			if(a1>a2) return d1;
 			else return d2;
 		}
+	}
+
+	public String getFileName() {
+		return fileName;
+	}
+
+	public void setFileName(String fileName) {
+		this.fileName = fileName;
 	}
 	
 
