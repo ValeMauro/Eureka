@@ -40,12 +40,17 @@ public class Repository {
 	private final String URL = "url";
 	private final String DATE = "date";
 	private final String RANK = "rank";
+	private final int titleRank=20;
+	private final int subtitleRank=10;
+	private final double textRank=0.5;
+	
 	
 	public Repository() {}
 	
 	//creazione directory di Lucene
 	public void create(){
 		analyzer = new StandardAnalyzer();
+		results= new LinkedList<Result>();
 		try {
 			File f = new File("myLucene");
 			if (!f.exists()) {
@@ -90,11 +95,39 @@ public class Repository {
 		}
 	}
 	
-	//mcercare nel file di Lucene
+	//conta url associati ad una source
+	
+	public LinkedList<Result> searchSource(String name) throws ParseException{
+
+		try {
+			Query query = new QueryParser(SOURCE, analyzer).parse(name);
+			
+			// apro l'indice di lettura del file
+			IndexReader reader = DirectoryReader.open(index);
+			searcher = new IndexSearcher(reader);
+
+			TopDocs docs = searcher.search(query, hitsPerPage);
+			ScoreDoc[] hits = docs.scoreDocs;
+
+			// Ricavo da ogni documento che matcha con la query
+			for (int i = 0; i < hits.length; i++) {
+				int docId = hits[i].doc;
+				
+				Document doc = searcher.doc(docId);
+				addInResultList(doc,docId,name);
+			}
+		} catch (IOException e) {
+			System.out.println(e.getMessage());
+		}
+		return results;
+
+	}
+	
+	//cercare nel file di Lucene
 	public LinkedList<Result> searchLucene(String querystr) throws IOException, ParseException {
 		
 		try {
-			Query query = new QueryParser(SOURCE, analyzer).parse(querystr);
+			Query query = new QueryParser(TEXT, analyzer).parse(querystr);
 			
 			// apro l'indice di lettura del file
 			IndexReader reader = DirectoryReader.open(index);
@@ -117,6 +150,7 @@ public class Repository {
 
 	}
 
+	
 	private void addInResultList(Document doc, int docId, String querystr) {
 		if(!isOnResult(docId)){
 			Result res= new Result();
@@ -127,8 +161,8 @@ public class Repository {
 			res.setText(doc.get(TEXT));
 			res.setUrl(doc.get(URL));
 			res.setDate(doc.get(DATE));
-			double rank= setRank(res,querystr);
-			//res.setRank();
+			double rank= makeValue(res,querystr);
+			res.setRank(rank);
 			results.add(res);
 		}	
 	}
@@ -140,8 +174,27 @@ public class Repository {
 		return false;
 	}
 
-	private double setRank(Result res, String querystr) {
-		// TODO Auto-generated method stub
-		return 0;
+
+	private double makeValue(Result res, String querystr) {
+		double rank= 0;
+		//scompongo querystr in un array di parole
+		String [] tokens = querystr.split("[\\W]");
+		//verifico il match di ogni parola in titolo, subtitolo e testo
+        for(String s:tokens){
+        	if(res.getTitle().contains(s)) rank=rank+titleRank;
+    		if(res.getSubtitle().contains(s)) rank=rank+subtitleRank;
+    		int count= counter(res.getText(),s);
+    		rank= rank+(count*textRank);	
+        }
+		return rank;		
+	}
+
+	private int counter(String text, String word) {
+		int counter=0;
+		int length= word.length();
+		for(int i=0; i<text.length()-length; i++){
+			if((text.substring(i, i+length)).equalsIgnoreCase(word)) counter++;
+		}
+		return counter;
 	}
 }

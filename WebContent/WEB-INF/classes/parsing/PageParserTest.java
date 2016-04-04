@@ -23,7 +23,7 @@ public class PageParserTest {
 	public static void main(String[] args) throws IOException {
 		LinkedList<Result> lista = new LinkedList<Result>();
 		Result res = new Result();
-		res.setUrl("http://www.leopardi.it/");
+		res.setUrl("http://jsoup.org/cookbook/introduction/parsing-a-document");
 		lista.add(res);
 		
 		PageParser pp = new PageParser();

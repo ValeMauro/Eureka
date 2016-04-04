@@ -37,8 +37,9 @@ public void ParsePage(LinkedList<Result> lista){
 				//trasformo la pagina html in stringa
 				String responseString = EntityUtils.toString(entity, "UTF-8");
 				
-				//setto il testo di res
-				res.setText(responseString);
+				//setto il testo html di res
+				//TODO modificare con setHTML e togliere dal commento
+				//res.setText(responseString);
 				
 				//parso la data di ultima modifica a partire dall'header della risposta http
 				for (Header header : headers) {
@@ -60,6 +61,9 @@ public void ParsePage(LinkedList<Result> lista){
 				//parsa la pagina html in Result res
 				parseHTML(res, responseString);
 				
+				//salva la pagina html su locale
+				saveToLocal(responseString);
+				
 				//print di check
 //				System.out.println("Title: " + res.getTitle());
 //				System.out.println("SubTitles: " + res.getSubtitle());
@@ -77,26 +81,45 @@ public void ParsePage(LinkedList<Result> lista){
 		
 	}
 
-//dato un file, lo parsa in un oggetto Result
+	//dato un file, lo parsa in un oggetto Result
 	private void parseHTML(Result res, String html) {
-		// TODO sistemare bene in modo che compili il Result
 				Document doc = new Document("");
 				
 				//faccio il parsing dell'html tramite JSoup
 				doc = Jsoup.parse(html);
 				
-				//riempio result
-				res.setTitle(doc.select("title").text());
-				
-				//TODO lasciamo gli h1/h2/h3 come subtitle? facciamo variabile apposta?
-				Elements subtitles_el = doc.select("h1");
-				subtitles_el.addAll(doc.select("h2"));
-				subtitles_el.addAll(doc.select("h3"));
-				String subtitles = "";
-				for (Element e : subtitles_el){
-					subtitles = subtitles+e.text()+" ";
+				//setto il title di res
+				if(doc.title()!=null){
+					res.setTitle(doc.title());
 				}
-				res.setSubtitle(subtitles);
+				else res.setTitle("");
 				
+				//text di res viene settato col contenuto di tutti i tag <p>
+				//TODO fare le prove con i div?
+//				Elements text_el = doc.select("p");
+//				String text = "";
+//				if(text_el!=null){
+//					for (Element e : text_el){
+//						text = text+e.text()+ " ";
+//					}
+//				}
+//				res.setText(text);
+				Element text_el = doc.select("body").first();
+				if(text_el!=null){
+					res.setText(text_el.text());
+				}
+				else res.setText("");
+				
+				//il primo h1 della pagina è settato come subtitle di res
+				Element subtitle_el = doc.select("h1").first();
+				if(subtitle_el!=null){
+					res.setSubtitle(subtitle_el.text());
+				}
+				else res.setSubtitle("");
+	}
+	
+	private void saveToLocal(String responseString) {
+		// TODO Auto-generated method stub
+		//crearsi una variabile string (di classe?) per il nome del file html
 	}
 }
