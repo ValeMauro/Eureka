@@ -34,6 +34,8 @@ public class Repository {
 	private LinkedList<Result> results;
 	private int hitsPerPage = 50; // Numero massimo di risultati restituiti dalla search
 	private final String SOURCE = "source";
+	private final String FILENAME = "filename";
+	private final String HTML = "html";
 	private final String TITLE = "title";
 	private final String SUBTITLE = "subtitle";
 	private final String TEXT = "text";
@@ -74,6 +76,8 @@ public class Repository {
 
 			Document doc = new Document();
 			doc.add(new TextField(SOURCE, res.getSource(), Field.Store.YES));
+			doc.add(new TextField(FILENAME, res.getFileName(), Field.Store.YES));
+			doc.add(new TextField(HTML, res.getHtml(), Field.Store.YES));
 			doc.add(new TextField(TITLE, res.getTitle(), Field.Store.YES));
 			doc.add(new TextField(SUBTITLE, res.getSubtitle(), Field.Store.YES));
 			doc.add(new TextField(TEXT, res.getText(), Field.Store.YES));
@@ -156,6 +160,8 @@ public class Repository {
 			Result res= new Result();
 			res.setId(docId);
 			res.setSource(doc.get(SOURCE));
+			res.setFileName(doc.get(FILENAME));
+			res.setHtml(doc.get(HTML));
 			res.setTitle(doc.get(TITLE));
 			res.setSubtitle(doc.get(SUBTITLE));
 			res.setText(doc.get(TEXT));
