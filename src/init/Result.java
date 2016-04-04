@@ -51,17 +51,10 @@ public class Result {
 		return text;
 	}
 	public void setText(String text) {		
-		this.text = parseText(text);
+		this.text =text;
 	}
 	
-	private String parseText(String text) {
-		String newText="";
-		char [] temp= text.toCharArray();
-		for(int i=0; i<temp.length; i++){
-			
-		}
-		return newText;
-	}
+	
 
 	public String getUrl() {
 		return url;
@@ -127,6 +120,8 @@ public class Result {
 	private static Result moreLastDate(Result d1, Result d2){
 		String date1=d1.getDate();
 		String date2=d2.getDate();
+		if(date1==null) return d2;
+		if(date2==null) return d1;
 		int g1= Integer.parseInt(date1.substring(0, 2));
 		int m1= Integer.parseInt(date1.substring(3, 5));
 		int a1= Integer.parseInt(date1.substring(6, 10));
