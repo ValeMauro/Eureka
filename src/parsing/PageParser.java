@@ -41,7 +41,7 @@ public class PageParser {
 
 	}
 
-	public void ParsePage(LinkedList<Result> lista){
+	public void parsePage(LinkedList<Result> lista){
 
 		for (Result res : lista) {
 			try {
