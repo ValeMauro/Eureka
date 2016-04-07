@@ -17,13 +17,17 @@ import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.util.EntityUtils;
 
 import init.Result;
+import lucene.Repository;
 
 public class PageParserTest {
 
 	public static void main(String[] args) throws IOException {
 		LinkedList<Result> lista = UrlFile.readFileProva();
 		PageParser pp = new PageParser();
+		Repository rep = new Repository();
+		rep.create();
 		pp.parsePage(lista);
+		rep.addAll(lista);
 		
 		
 		

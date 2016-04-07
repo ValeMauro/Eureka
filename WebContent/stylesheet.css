@@ -1,0 +1,62 @@
+/* CSS Document */
+body {
+	background-color:#eaeaea;
+	font-family: Verdana, Arial;
+	font-size: 14px;
+	color: #6f6f6f;
+	text-align:left;
+}
+
+body a{
+	color: #b0002e;
+	text-decoration: none;
+	font-weight:bold;
+}
+
+body a:hover{
+	text-decoration:underline;
+}
+
+#content {
+
+}
+
+.resultItem{
+	padding-top:30px;
+}
+
+#maincontent{
+	background-color: #efefef;
+	margin-left:10%;
+	margin-right:10%;
+	margin-bottom: 40px;
+	border: 4px double #9b9b9b;
+	padding: 30px;
+	}
+
+#footer {
+
+}
+
+p.errori{
+	color:#FF0000;
+}
+
+h1{
+
+}
+
+h2{
+	
+}
+
+h3{
+
+}
+
+input.bottone{
+	background-color: #ffffff;
+	font-weight: bold;
+	color: black;
+	margin: 5px;
+}

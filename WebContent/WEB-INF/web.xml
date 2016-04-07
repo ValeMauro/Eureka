@@ -1,28 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" id="WebApp_ID" version="2.5">
-  <display-name>AGIW-homework1-2016</display-name>
-  <welcome-file-list>
-    <welcome-file>index.html</welcome-file>
-    <welcome-file>default.jsp</welcome-file>
-  </welcome-file-list>
-  <servlet>
-    <servlet-name>Search</servlet-name>
-    <servlet-class>     
-      userInterface.ServletSearch
-  </servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>Search</servlet-name>
-    <url-pattern>/servletSearch</url-pattern>
-  </servlet-mapping>
-  <servlet>
-    <description></description>
-    <display-name>ServletSearch</display-name>
-    <servlet-name>ServletSearch</servlet-name>
-    <servlet-class>userInterface.ServletSearch</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>ServletSearch</servlet-name>
-    <url-pattern>/ServletSearch</url-pattern>
-  </servlet-mapping>
+  <display-name>Eureka</display-name>
+	
+	<welcome-file-list>
+		<welcome-file>index.html</welcome-file>
+		<welcome-file>index.jsp</welcome-file>
+	</welcome-file-list>
+	
+	<servlet>
+		<servlet-name>search.do</servlet-name>
+		<servlet-class>userInterface.ServletSearch</servlet-class>
+	</servlet>
+	
+	<servlet-mapping>
+		<servlet-name>search.do</servlet-name>
+		<url-pattern>/search</url-pattern>
+	</servlet-mapping>
 </web-app>
