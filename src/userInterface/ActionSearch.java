@@ -17,6 +17,7 @@ public class ActionSearch {
 		HelperSearch helper = new HelperSearch(request);
 		if(helper.validate()){
 			String query = request.getParameter("query");
+			query = query.trim();
 			Repository rep = new Repository();
 			rep.create();
 			LinkedList<Result> result = new LinkedList<Result>();

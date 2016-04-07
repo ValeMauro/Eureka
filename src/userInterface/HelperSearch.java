@@ -19,8 +19,9 @@ public class HelperSearch {
 	}
 	
 	public boolean validate(){
+		errori.clear();
 		boolean everythingOk = true;
-		
+
 		if(query==null || query.equals("")){
 			everythingOk=false;
 			errori.put("query", "campo obbligatorio");
