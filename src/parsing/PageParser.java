@@ -73,12 +73,12 @@ public class PageParser {
 					}
 
 				}
+				
+				//salva la pagina su locale
+				saveToLocal(res, responseString);
 
 				//parsa la pagina html in Result res
 				parseHTML(res, responseString);
-
-				//salva la pagina html su locale
-				saveToLocal(res, responseString);
 
 				//print di check
 				//				System.out.println("Title: " + res.getTitle());
@@ -135,7 +135,6 @@ public class PageParser {
 	}
 
 	private void saveToLocal(Result res, String responseString) {
-		// TODO CONTROLLARE SE FUNZIONA
 		String folder_name = res.getSource().replace(" ", "_");
 		File folder = new File(ROOT, folder_name);
 		if (!folder.exists()){
@@ -148,7 +147,14 @@ public class PageParser {
 		}
 		File[] folder_list = folder.listFiles();
 		int counter = folder_list.length+1;
-		String file_name = folder_name + Integer.toString(counter) + ".html";
+		String file_name = "";
+		String url = res.getUrl();
+//		String extention = url.substring(url.lastIndexOf('.'));
+//		file_name = folder_name + Integer.toString(counter) + extention;
+		if(!url.substring(url.lastIndexOf('.')).equals(".pdf")){
+			file_name = folder_name + Integer.toString(counter) + ".html";
+		} else file_name = folder_name + Integer.toString(counter) + ".pdf";
+		
 		//setto il nome del file in res
 		res.setFileName(file_name);
 		File file = new File(folder, file_name);
