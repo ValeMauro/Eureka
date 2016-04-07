@@ -25,6 +25,7 @@ import org.apache.lucene.store.Directory;
 import org.apache.lucene.store.FSDirectory;
 
 import init.Result;
+import init.Similar;
 
 public class Repository {
 	private Directory index;
@@ -202,5 +203,50 @@ public class Repository {
 			if((text.substring(i, i+length)).equalsIgnoreCase(word)) counter++;
 		}
 		return counter;
+	}
+	
+	public LinkedList<Similar> similary(LinkedList<Result> res) throws IOException, ParseException{
+		LinkedList<String> urls= new LinkedList<String>();
+		LinkedList<String> temp= new LinkedList<String>();
+		LinkedList<Similar> sim= new LinkedList<Similar>();
+		for (Result r : res) {
+			if(r!=null) 
+				if(r.getUrl()!=null && !r.getUrl().equals("")) urls.add(r.getUrl());
+		}
+		temp= searchAllSimilary(urls);
+		sim=Similar.create(temp);
+		return sim;
+	}
+
+	private LinkedList<String> searchAllSimilary(LinkedList<String> urls)throws IOException, ParseException {
+		LinkedList<String> names= new LinkedList<String>();
+		for (String s : urls) {
+			names.addAll(searchSimilary(s));
+		}
+		return names;
+	}
+	
+	private LinkedList<String> searchSimilary(String querystr) throws IOException, ParseException {
+		LinkedList<String> names= new LinkedList<String>();
+		try {
+			Query query = new QueryParser(URL, analyzer).parse(querystr);
+			
+			// apro l'indice di lettura del file
+			IndexReader reader = DirectoryReader.open(index);
+			searcher = new IndexSearcher(reader);
+
+			TopDocs docs = searcher.search(query, hitsPerPage);
+			ScoreDoc[] hits = docs.scoreDocs;
+
+			// Ricavo da ogni documento che matcha con la query
+			for (int i = 0; i < hits.length; i++) {
+				int docId = hits[i].doc;
+				Document doc = searcher.doc(docId);
+				names.add(doc.get(SOURCE));
+			}
+		} catch (IOException e) {
+			System.out.println(e.getMessage());
+		}
+	return names;
 	}
 }
