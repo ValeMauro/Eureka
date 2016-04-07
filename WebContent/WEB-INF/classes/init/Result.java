@@ -16,6 +16,14 @@ public class Result {
 	private double rank;
 	
 	public Result(){
+		source="";
+		fileName="";
+		html="";
+		title="";
+		subtitle="";
+		text="";
+		url="";
+		date="";
 		rank=0;
 	}
 	

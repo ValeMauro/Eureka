@@ -55,13 +55,13 @@ public class Repository {
 		results= new LinkedList<Result>();
 		try {
 			File f = new File("myLucene");
-			if (!f.exists()) {
-				index = FSDirectory.open(Paths.get("myLucene"));
-				//Creazione DataSet
-				//TODO
-			}
-
-			else
+//			if (!f.exists()) {
+//				index = FSDirectory.open(Paths.get("myLucene"));
+//				//Creazione DataSet
+//				//TODO
+//			}
+//
+//			else
 				index = FSDirectory.open(Paths.get("myLucene"));
 		} catch (IOException e) {
 			System.out.println("Errore apertura file myLucene");
