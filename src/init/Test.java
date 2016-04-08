@@ -20,8 +20,8 @@ public class Test {
 		private static void similar() throws IOException, ParseException {
 			Repository rep= new Repository();
 			rep.create();
-			LinkedList<Result> res=rep.searchLucene("Ugo");
-			LinkedList<Similar> sims= rep.similary(res, "Ugo");
+			LinkedList<Result> res=rep.searchLucene("Achille");
+			LinkedList<Similar> sims= rep.similary(res, "Achille");
 			for (Similar similar : sims) {
 				System.out.println(similar.getName()+" "+similar.getGrade());
 			}

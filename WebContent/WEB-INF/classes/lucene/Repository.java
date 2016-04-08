@@ -229,8 +229,16 @@ public class Repository {
 		if (temp.isEmpty())
 			sim = searchName(query);
 		else
-			sim = Similar.create(temp);
+			sim = deleteQueryFromList(Similar.create(temp), query);
 		return sim;
+	}
+
+	private LinkedList<Similar> deleteQueryFromList(LinkedList<Similar> list, String query) {
+		LinkedList<Similar> newList=new LinkedList<Similar>();
+		for (Similar similar : list) {
+			if(!similar.getName().equals(query)) newList.add(similar);
+		}
+		return newList;
 	}
 
 	public LinkedList<Similar> searchName(String query) {
@@ -310,7 +318,8 @@ public class Repository {
 			for (int i = 0; i < hits.length; i++) {
 				int docId = hits[i].doc;
 				Document doc = searcher.doc(docId);
-				names.add(doc.get(SOURCE));
+				if(querystr.equals(doc.get(URL)))
+					names.add(doc.get(SOURCE));
 			}
 		} catch (IOException e) {
 			System.out.println(e.getMessage());
