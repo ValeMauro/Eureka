@@ -18,9 +18,9 @@ Angelo Monti
 Anna Labella 
 Annalisa Massini 
 Annalisa Schino
-Annunziata D’Orazio 
+Annunziata D'Orazio 
 Antonetta Bruno 
-Antonio D’Andrea 
+Antonio D'Andrea 
 Antonio Mussino
 Antonio Sassano 
 Antonio Siconolfi 
@@ -57,7 +57,7 @@ Fabio Grasso
 Fabio Nonino 
 Fabio Russo 
 Fabio Scarabotti 
-Fabrizio D’Amore
+Fabrizio D'Amore
 Fabrizio Pirro 
 Federico Masini 
 Filippo Gonnelli
@@ -94,7 +94,7 @@ Giuseppe De Giacomo
 Giuseppe Loprencipe  
 Giuseppe Oriolo
 Giuseppe Santucci
-Guglielmo D’Inzeo 
+Guglielmo D'Inzeo 
 Henry Rodgers 
 Ilaria Tani 
 Irene Finocchi 
@@ -117,7 +117,7 @@ Luciano Iess
 Luigi Cinque 
 Luigi Grippo 
 Luigi Vincenzo Mancini
-Marcello Musté
+Marcello MustÃ¨
 Marcello Onofri 
 Marco Listanti 
 Marco Marini 
@@ -145,7 +145,7 @@ Michele Cadoli
 Monica Scannapieco 
 Nicola Cordeschi 
 Nicola Galesi 
-Nicola Nisticò 
+Nicola NisticÃ²
 Olivier Durand 
 Oliviero Casacchia
 Paola Bozzao
@@ -198,13 +198,3 @@ Umberto Nanni
 Vincenzo Ferrara 
 Vincenzo Patera 
 Virginio Marzocchi
-
-
-
-
-
-
-
-
-
-
