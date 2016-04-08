@@ -1,25 +1,49 @@
 package init;
 
+import java.io.IOException;
 import java.util.LinkedList;
 
+import org.apache.lucene.queryparser.classic.ParseException;
+
 import lucene.Repository;
+import statistic.Performance;
 
 public class Test {
 //https://sites.google.com/a/uniroma1.it/achillepaolone/
 	public static void main(String[] args) throws Exception {
-		Repository rep= new Repository();
-		rep.create();
-//		rep.searchSimilary("https://sites.google.com/a/uniroma1.it/achillepaolone/");
-//		LinkedList<Similar> sims= rep.searchName("Amedeo");
-//		for (Similar similar : sims) {
-//			System.out.println(similar.getName()+" "+similar.getGrade());
-//		}
 //		order();
-		LinkedList<Result> res=rep.searchLucene("Achille");
-		System.out.println(res.size());
+// 		statistic();
+		similar();		
 	}
 	
 	
+		private static void similar() throws IOException, ParseException {
+			Repository rep= new Repository();
+			rep.create();
+			LinkedList<Result> res=rep.searchLucene("Ugo");
+			LinkedList<Similar> sims= rep.similary(res, "Ugo");
+			for (Similar similar : sims) {
+				System.out.println(similar.getName()+" "+similar.getGrade());
+			}
+	
+		}
+
+
+		private static void statistic() throws IOException, ParseException {
+			Repository rep= new Repository();
+			rep.create();
+			LinkedList<Result> res=rep.searchLucene("Arbizzani");
+			Performance.precision(res, "Arbizzani");
+			res=rep.searchLucene("Eugenio");
+			Performance.precision(res, "Eugenio");
+			res=rep.searchLucene("Ugo");
+			Performance.precision(res, "Ugo");
+			res=rep.searchLucene("Paolone Achille");
+			Performance.precision(res, "Paolone Achille");
+		
+	}
+
+
 		private static void order() {
 			LinkedList<Result> list= new LinkedList<Result>();
 			Result r1= new Result();

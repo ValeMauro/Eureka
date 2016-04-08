@@ -27,6 +27,7 @@ import org.apache.lucene.search.TopDocs;
 import org.apache.lucene.store.Directory;
 import org.apache.lucene.store.FSDirectory;
 import org.apache.tomcat.util.http.fileupload.FileUtils;
+import org.jsoup.parser.Parser;
 
 import init.Result;
 import init.Similar;
@@ -108,10 +109,10 @@ public class Repository {
 
 	// conta url associati ad una source
 
-	public LinkedList<Result> searchSource(String name) throws ParseException {
+	public LinkedList<Result> searchSource(String querystr) throws IOException, ParseException {
 
 		try {
-			Query query = new QueryParser(SOURCE, analyzer).parse(name);
+			Query query = new QueryParser(SOURCE, analyzer).parse(querystr);
 
 			// apro l'indice di lettura del file
 			IndexReader reader = DirectoryReader.open(index);
@@ -125,7 +126,7 @@ public class Repository {
 				int docId = hits[i].doc;
 
 				Document doc = searcher.doc(docId);
-				addInResultList(doc, docId, name);
+				addInResultList(doc, docId, querystr);
 			}
 		} catch (IOException e) {
 			System.out.println(e.getMessage());
@@ -225,7 +226,7 @@ public class Repository {
 		}
 		// temp <- lista di nomi di Utenti con urls in comune con query
 		temp = searchAllSimilary(urls);
-		if (temp == null)
+		if (temp.isEmpty())
 			sim = searchName(query);
 		else
 			sim = Similar.create(temp);
@@ -296,8 +297,8 @@ public class Repository {
 	public LinkedList<String> searchSimilary(String querystr) throws IOException, ParseException {
 		LinkedList<String> names = new LinkedList<String>();
 		try {
-			Query query = new QueryParser(URL, analyzer).parse(querystr);
-
+//			Query query = new QueryParser(URL, analyzer).parse(querystr);
+			Query query =new QueryParser(URL, analyzer).parse(QueryParser.escape(querystr));
 			// apro l'indice di lettura del file
 			IndexReader reader = DirectoryReader.open(index);
 			searcher = new IndexSearcher(reader);
