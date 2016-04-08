@@ -88,7 +88,7 @@ public class Repository {
 			doc.add(new TextField(SUBTITLE, res.getSubtitle(), Field.Store.YES));
 			doc.add(new TextField(TEXT, res.getText(), Field.Store.YES));
 			doc.add(new TextField(URL, res.getUrl(), Field.Store.YES));
-			doc.add(new StringField(DATE, res.getDate(), Field.Store.YES));
+			doc.add(new TextField(DATE, res.getDate(), Field.Store.YES));
 			doc.add(new DoubleField(RANK, res.getRank(), Field.Store.YES));
 
 			// aggiungo doc al file
