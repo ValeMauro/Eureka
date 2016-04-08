@@ -17,14 +17,19 @@
 	} %>
 </head>
 <body>
-<div id="maincontent">
-[LOGO]<br />
+<div id="indexContent">
+<div id="indexHeader">
+	<center><a href="index.jsp"><img src="images/logoEureka.png" /></a>
+	<br /><br />
 	<form action="search.do" method="GET">
-		<input class="bottone" size="50" type="text" name="query"/><input type="submit"
-			value="Conferma" name="conferma" /><input type="reset"	value="Reset" />
+		<input class="bottone" size="50" type="text" name="query"/>
+		<input class="linkButton" type="hidden" value="ByRank" name="order" />
+		<input type="submit" value="Conferma" name="conferma" /><input type="reset"	value="Reset" />
 	</form>
-	<% if (errori!=null && errori.get("query")!=null)
+	<p class="errori"><% if (errori!=null && errori.get("query")!=null)
 		    out.print("<span class=\"errore\">" +errori.get("query")+ "</span>");%>
+	</p></center>
+</div>
 </div>
 </body>
 </html>
