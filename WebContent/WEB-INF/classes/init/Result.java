@@ -126,10 +126,10 @@ public class Result {
 	}
 
 	private static Result moreLastDate(Result d1, Result d2){
-		String date1=d1.getDate();
-		String date2=d2.getDate();
-		if(date1==null) return d2;
-		if(date2==null) return d1;
+		String date1=d1.getDate().toString();
+		String date2=d2.getDate().toString();
+		if(date1==null || date1.equals("") || date1.length()<10) return d2;
+		if(date2==null || date2.equals("") || date2.length()<10) return d1;
 		int g1= Integer.parseInt(date1.substring(0, 2));
 		int m1= Integer.parseInt(date1.substring(3, 5));
 		int a1= Integer.parseInt(date1.substring(6, 10));
