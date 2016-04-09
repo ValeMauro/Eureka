@@ -23,11 +23,11 @@ public class PageParserTest {
 
 	public static void main(String[] args) throws IOException {
 		LinkedList<Result> lista = UrlFile.readFileProva();
-		PageParser pp = new PageParser();
 		Repository rep = new Repository();
 		rep.create();
+		PageParser pp = new PageParser(rep);
 		pp.parsePage(lista);
-		rep.addAll(lista);
+//		rep.addAll(lista);
 		
 		
 		

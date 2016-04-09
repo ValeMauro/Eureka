@@ -23,11 +23,13 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 
 import init.Result;
+import lucene.Repository;
 
 public class PageParser {
 	final String ROOT = "websites";
+	private Repository rep;
 
-	public PageParser(){
+	public PageParser(Repository rep){
 		File root = new File(ROOT);
 		// se la cartella non esiste la crea
 		if (!root.exists()) {
@@ -38,7 +40,7 @@ public class PageParser {
 		        e.getMessage();
 		    }        
 		}
-
+		this.rep = rep;
 	}
 
 	public void parsePage(LinkedList<Result> lista){
@@ -74,16 +76,13 @@ public class PageParser {
 
 				}
 				
-				//salva la pagina su locale
-				saveToLocal(res, responseString);
-
 				//parsa la pagina html in Result res
 				parseHTML(res, responseString);
 
-				//print di check
-				//				System.out.println("Title: " + res.getTitle());
-				//				System.out.println("SubTitles: " + res.getSubtitle());
-				//				System.out.println("Last-modified: " + res.getDate());
+				rep.add(res);
+				
+				//salva la pagina su locale
+				saveToLocal(res, responseString);
 
 			} catch (ClientProtocolException e) {
 				e.getMessage();
@@ -111,15 +110,6 @@ public class PageParser {
 		else res.setTitle("");
 
 		//text di res viene settato col contenuto di tutti i tag <p>
-		//TODO fare le prove con i div?
-		//				Elements text_el = doc.select("p");
-		//				String text = "";
-		//				if(text_el!=null){
-		//					for (Element e : text_el){
-		//						text = text+e.text()+ " ";
-		//					}
-		//				}
-		//				res.setText(text);
 		Element text_el = doc.select("body").first();
 		if(text_el!=null){
 			res.setText(text_el.text());
@@ -138,19 +128,12 @@ public class PageParser {
 		String folder_name = res.getSource().replace(" ", "_");
 		File folder = new File(ROOT, folder_name);
 		if (!folder.exists()){
-//			try{
-		        folder.mkdir();
-//		    } 
-//		    catch(SecurityException e){
-//		        e.getMessage();
-//		    }    
+	        folder.mkdir();   
 		}
 		File[] folder_list = folder.listFiles();
 		int counter = folder_list.length+1;
 		String file_name = "";
 		String url = res.getUrl();
-//		String extention = url.substring(url.lastIndexOf('.'));
-//		file_name = folder_name + Integer.toString(counter) + extention;
 		if(!url.substring(url.lastIndexOf('.')).equals(".pdf")){
 			file_name = folder_name + Integer.toString(counter) + ".html";
 		} else file_name = folder_name + Integer.toString(counter) + ".pdf";
