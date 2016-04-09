@@ -216,20 +216,24 @@ public class Repository {
 
 	// query <- nome cercato dall'utente
 	public LinkedList<Similar> similary(LinkedList<Result> res, String query) throws IOException, ParseException {
-		LinkedList<String> urls = new LinkedList<String>();
-		LinkedList<String> temp = new LinkedList<String>();
 		LinkedList<Similar> sim = new LinkedList<Similar>();
-		for (Result r : res) {
-			if (r != null)
-				if (r.getUrl() != null && !r.getUrl().equals(""))
-					urls.add(r.getUrl());
+		if(!res.isEmpty()){
+			LinkedList<String> urls = new LinkedList<String>();
+			LinkedList<String> temp = new LinkedList<String>();
+			for (Result r : res) {
+				if (r != null)
+					if (r.getUrl() != null && !r.getUrl().equals(""))
+						urls.add(r.getUrl());
+			}
+			// temp <- lista di nomi di Utenti con urls in comune con query
+			temp = searchAllSimilary(urls);
+			if (temp.isEmpty())
+				sim = searchName(query);
+			else
+				sim = deleteQueryFromList(Similar.create(temp), query);
 		}
-		// temp <- lista di nomi di Utenti con urls in comune con query
-		temp = searchAllSimilary(urls);
-		if (temp.isEmpty())
-			sim = searchName(query);
-		else
-			sim = deleteQueryFromList(Similar.create(temp), query);
+			
+		else sim = searchName(query);
 		return sim;
 	}
 
