@@ -17,22 +17,126 @@ body a:hover{
 	text-decoration:underline;
 }
 
-#content {
-
+p{
+	margin-top:0px;
+	margin-bottom:10px;
 }
 
-.resultItem{
-	padding-top:30px;
+
+#indexContent{
+	width: 80%;
+    height: 250px;
+    position: absolute;
+    top:0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+    padding-top: 5px;
+    background-color: #f8f8f8;
+}
+
+#indexHeader{
+	margin:auto;
+	margin-top:10px;
+	width:80%;
+}
+
+#header{
+	margin:auto;
+	width:80%;
+	margin-bottom:30px;
+	padding-top:40px;
+}
+
+#resultItem{
+	padding-bottom:30px;
+	border-bottom: 2px dotted #babdb6;
+	margin-bottom:15px;
+}
+
+p.itemDate{
+	position:relative;
+	float:right;
+}
+
+p.itemTitle{
+	margin-top:0px;
+	margin-bottom:10px;
+	font-size:13pt;
+}
+
+p.itemSubtitle{
+	font-size:11pt;
+	font-style: italic;
+	color:#babdb6;
+	padding-left:30px;
+	text-decoration:underline;
+}
+
+a.itemLink{
+	color:#5c3566;
+	position:relative;
+	float:left;
+}
+
+.linkButton {
+	background: none !important;
+	border: none;
+	padding: 0 !important;
+	font: inherit;
+	cursor: pointer;
+	color: #b0002e;
+	text-decoration: none;
+	font-weight: bold;
+}
+.linkButton:hover {
+	text-decoration: underline;
+}
+
+#content {
+	background-color: #f8f8f8;
+	margin-left:10%;
+	margin-right:15%;
+	margin-bottom: 40px;
+	padding-bottom:10px;
 }
 
 #maincontent{
-	background-color: #efefef;
-	margin-left:10%;
-	margin-right:10%;
-	margin-bottom: 40px;
+	background-color: #f3f3f3;
 	border: 4px double #9b9b9b;
 	padding: 30px;
+	margin:30px;
+	margin-top:10px;
 	}
+
+div.orderOptions{
+	text-align: right;
+	margin-right:50px;
+}
+
+
+#sidebar{
+	background-color: #f3f3f3;
+	border: 4px double #9b9b9b;
+	position:relative;
+	float:right;
+	top:25px;
+	right:-220px;
+	width:250px;
+	margin-left:5px;
+	padding-left:7px;
+	padding-top:5px;
+}
+
+p.titleSidebar{
+	font-weight: bold;
+	color: #5c3566;
+}
+
+li{
+	margin-bottom: 10px;	
+}
 
 #footer {
 
@@ -40,18 +144,6 @@ body a:hover{
 
 p.errori{
 	color:#FF0000;
-}
-
-h1{
-
-}
-
-h2{
-	
-}
-
-h3{
-
 }
 
 input.bottone{

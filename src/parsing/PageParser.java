@@ -23,11 +23,13 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 
 import init.Result;
+import lucene.Repository;
 
 public class PageParser {
 	final String ROOT = "websites";
+	private Repository rep;
 
-	public PageParser(){
+	public PageParser(Repository rep){
 		File root = new File(ROOT);
 		// se la cartella non esiste la crea
 		if (!root.exists()) {
@@ -38,7 +40,7 @@ public class PageParser {
 		        e.getMessage();
 		    }        
 		}
-
+		this.rep = rep;
 	}
 
 	public void parsePage(LinkedList<Result> lista){
@@ -74,12 +76,13 @@ public class PageParser {
 
 				}
 				
-				//salva la pagina su locale
-				saveToLocal(res, responseString);
-
 				//parsa la pagina html in Result res
 				parseHTML(res, responseString);
 
+				rep.add(res);
+				
+				//salva la pagina su locale
+				saveToLocal(res, responseString);
 
 			} catch (ClientProtocolException e) {
 				e.getMessage();
