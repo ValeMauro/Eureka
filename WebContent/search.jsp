@@ -14,7 +14,7 @@
 <body>
 <div id="content">
 	<div id="header">
-	<center><a href="index.jsp"><img src="images/logoEureka.png" /></a></center>
+	<center><a href="index.jsp"><img src="images/logoEureka1.png" /></a></center>
 	<form action="search.do" method="GET">
 		<input class="bottone" size="50" type="text" name="query" value="" />
 		<input class="linkButton" type="hidden" value="ByRank" name="order" /><input type="submit"
