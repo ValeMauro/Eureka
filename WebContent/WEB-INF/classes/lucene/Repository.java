@@ -1,8 +1,6 @@
 package lucene;
 
 import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.nio.file.Paths;
@@ -13,7 +11,6 @@ import org.apache.lucene.document.Document;
 import org.apache.lucene.document.DoubleField;
 import org.apache.lucene.document.TextField;
 import org.apache.lucene.document.Field;
-import org.apache.lucene.document.StringField;
 import org.apache.lucene.index.DirectoryReader;
 import org.apache.lucene.index.IndexReader;
 import org.apache.lucene.index.IndexWriter;
@@ -26,8 +23,6 @@ import org.apache.lucene.search.ScoreDoc;
 import org.apache.lucene.search.TopDocs;
 import org.apache.lucene.store.Directory;
 import org.apache.lucene.store.FSDirectory;
-import org.apache.tomcat.util.http.fileupload.FileUtils;
-import org.jsoup.parser.Parser;
 
 import init.Result;
 import init.Similar;
@@ -61,14 +56,6 @@ public class Repository {
 		analyzer = new StandardAnalyzer();
 		results = new LinkedList<Result>();
 		try {
-			File f = new File("myLucene");
-			// if (!f.exists()) {
-			// index = FSDirectory.open(Paths.get("myLucene"));
-			// //Creazione DataSet
-			// //TODO
-			// }
-			//
-			// else
 			index = FSDirectory.open(Paths.get("myLucene"));
 		} catch (IOException e) {
 			System.out.println("Errore apertura file myLucene");
@@ -309,7 +296,6 @@ public class Repository {
 	public LinkedList<String> searchSimilary(String querystr) throws IOException, ParseException {
 		LinkedList<String> names = new LinkedList<String>();
 		try {
-//			Query query = new QueryParser(URL, analyzer).parse(querystr);
 			Query query =new QueryParser(URL, analyzer).parse(QueryParser.escape(querystr));
 			// apro l'indice di lettura del file
 			IndexReader reader = DirectoryReader.open(index);
